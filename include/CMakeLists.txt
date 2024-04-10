@@ -1,5 +1,5 @@
 set(registered-cpp_INC
-	const.hpp
+	Register.hpp
 )
 
 PREPEND(registered-cpp_INC)
