@@ -14,6 +14,10 @@ public:
 		if(val1_current) val2 = newVal;
 		else val1 = newVal;
 	}
+	void move_set(T newVal) {
+		if(val1_current) val2 = std::move(newVal);
+		else val1 = std::move(newVal);
+	}
 	void update() {val1_current ^= 1;}
 private:
 	bool val1_current = false;

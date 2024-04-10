@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include "Register.hpp"
 
-TEST_CASE("Register registers output unitl update", "[Register]"){
+TEST_CASE("Registers register output unitl update", "[Register]"){
 	Register<int> r;
 	r.set(5);
 	r.update();
@@ -10,6 +10,10 @@ TEST_CASE("Register registers output unitl update", "[Register]"){
 	REQUIRE(r.get() == 5);
 	r.update();
 	REQUIRE(r.get() == 6);
+	r.set(7);
+	REQUIRE(r.get() == 6);
+	r.update();
+	REQUIRE(r.get() == 7);
 }
 
 class NoDefaultCstr{
@@ -17,25 +21,27 @@ class NoDefaultCstr{
 	NoDefaultCstr(int i){a = i;}
 	int a;
 };
-TEST_CASE("Register of no default constructor", "[Register]"){
+TEST_CASE("Register of NoDefaultCstr", "[Register]"){
 	Register<NoDefaultCstr> r(6);
 	REQUIRE(r.get().a == 6);
 }
-/*
+
 class NoCopy{
 public:
 	NoCopy(int x): a(x){}
 	NoCopy(NoCopy&& rhs): a(rhs.a) {rhs.a = 0;}
-	NoCopy(const NoCopy&);
-	NoCopy& operator=(const NoCopy&);
+	NoCopy(const NoCopy&) = delete;
+	NoCopy& operator=(const NoCopy&) = delete;
+	NoCopy& operator=(NoCopy&& rhs) = default;
 	int a;
 };
-TEST_CASE("No copy", "[Register]"){
+TEST_CASE("Register of NoCopy", "[Register]"){
 	Register<NoCopy> r(NoCopy(6),NoCopy(7));
 	REQUIRE(r.get().a == 7);
 	r.update();
 	REQUIRE(r.get().a == 6);
-	r.set(NoCopy(5));
+	r.move_set(NoCopy(5));
 	r.update();
 	REQUIRE(r.get().a == 5);
-}*/
+}
+
