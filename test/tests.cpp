@@ -1,7 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include "Register.hpp"
+#include "Combinational.hpp"
 
-TEST_CASE("Registers register output unitl update", "[Register]"){
+TEST_CASE("Registers register output until update", "[Register]"){
 	Register<int> r;
 	r.set(5);
 	r.update();
@@ -45,3 +46,10 @@ TEST_CASE("Register of NoCopy", "[Register]"){
 	REQUIRE(r.get().a == 5);
 }
 
+TEST_CASE("Some combinational logic", "[Combinational]"){
+	Register<int> a(0,6);
+	Register<double> b(0.0,-4.0);
+	Register<int> c(0,6);
+	Register<double> d(0.0,6.0);
+	Combinational comb({},{},[](Combinational* t) {t-> });
+}

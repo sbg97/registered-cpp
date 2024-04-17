@@ -2,8 +2,14 @@
 #define REGISTER
 #include <utility>
 
+class Updatable{
+public:
+	virtual void update() = 0;
+};
+
+
 template<typename T>
-class Register{
+class Register: Updatable{
 public:
 	Register(){}
 	Register(T val):val1(val),val2(val){}

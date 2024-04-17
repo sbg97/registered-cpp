@@ -24,6 +24,8 @@ endfunction(PREPEND)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
+find_package(Boost REQUIRED fiber)
+
 add_subdirectory(src)
 add_subdirectory(include)
 

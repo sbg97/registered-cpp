@@ -1,5 +1,7 @@
 set(registered-cpp_INC
 	Register.hpp
+	Combinational.hpp
+	ClockDomain.hpp
 )
 
 PREPEND(registered-cpp_INC)
