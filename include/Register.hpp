@@ -9,7 +9,7 @@ public:
 
 
 template<typename T>
-class Register: Updatable{
+class Register: public Updatable{
 public:
 	Register(){}
 	Register(T val):val1(val),val2(val){}

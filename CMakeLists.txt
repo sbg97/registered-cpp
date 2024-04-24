@@ -4,6 +4,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE Debug)
 
 project(registered-cpp VERSION 1.0)
 set(registered-cpp_VERSION 1.0)
@@ -44,6 +45,9 @@ target_include_directories(registered-cpp PUBLIC
 	
 	$<INSTALL_INTERFACE:include>
 )
+
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(registered-cpp ${Boost_LIBRARIES})
 
 install(
 	TARGETS registered-cpp

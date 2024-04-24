@@ -1,20 +1,19 @@
 #ifndef COMBINATIONAL
 #define COMBINATIONAL
-#include <functional>
-#include <vector>
-#include "Register.hpp"
 
-class Combinational{
+class Runnable{
 public:
-	Combinational(std::vector<void*> input,
-	       std::vector<void*> output,
-	       std::function<void(Combinational*)> fn)
-	:input(input), output(output), fn(fn){}
+	virtual void run() = 0;
+};
+
+template <typename TF>
+class Combinational : public Runnable{
+public:
+	Combinational(TF fn)
+	:fn(fn){}
 	
-	void run() {fn(this);}
+	void run() {fn();}
 private:
-	std::vector<void*> input;
-	std::vector<void*> output;
-	std::function<void(Combinational*)> fn;
+	TF fn;
 };
 #endif // COMBINATIONAL
